@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-manual-label-nodeselector
+  labels:
+    app: kubia-manual
+spec:
+  nodeSelector:
+      env: dev
+  containers:
+    - name: kubia-manual
+      image: luksa/kubia
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+#  restartPolicy: Always

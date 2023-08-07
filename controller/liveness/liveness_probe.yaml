@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-liveness
+  labels:
+    app: kubia-liveness
+spec:
+  containers:
+    - name: kubia-liveness
+      image: luksa/kubia-unhealthy
+      imagePullPolicy: IfNotPresent
+      livenessProbe:
+        httpGet:
+          port: 8080
+          path: /
+        initialDelaySeconds: 15
+        timeoutSeconds: 5
+        periodSeconds: 10
+  restartPolicy: Always
+  
