@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjon
+spec:
+  # 在什么时候运行
+  schedule: "0,15,30,45" #	Run every minute
+  startingDeadlineSeconds: 15
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: cronjon
+              image: busybox:latest
+              imagePullPolicy: IfNotPresent
+              command:
+                - /bin/sh
+                - -c
+                - date; echo Hello!
+          restartPolicy: OnFailure

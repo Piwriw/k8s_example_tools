@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-service
+spec:
+  containers:
+    - name: kubia
+      ports:
+        - containerPort: 8080
+          name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubia-service
+spec:
+  ports:
+    - port: 80
+      name: 8080
