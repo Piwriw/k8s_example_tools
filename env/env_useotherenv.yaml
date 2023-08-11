@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env_base
+  labels:
+    app: env_vase
+spec:
+  containers:
+    - name: env_base
+      image: luksa/fortume:env
+      # 设置环境变量，注意 k8s会在每个容器中，自动暴露同namespace下的环境变量
+      env:
+        - name: INIERVAL
+          value: "30"
+        - name: SEC_VAR
+          value: "${FIRST_VAR}"
+      imagePullPolicy: IfNotPresent
+  restartPolicy: Always
+  
