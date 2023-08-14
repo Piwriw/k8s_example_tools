@@ -14,4 +14,3 @@ spec:
       release: "stable"
     matchExpressions:
       - {key: environment, operator: In, values: [dev]}
-      - 

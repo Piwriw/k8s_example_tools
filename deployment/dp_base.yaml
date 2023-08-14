@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubia-deployment
+  labels:
+    app: kubia-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kubia-deployment
+  template:
+    metadata:
+      name: kubia-deployment
+      labels:
+        app: kubia-deployment
+    spec:
+      containers:
+        - name: kubia-deployment
+          image: luksa/kubia:v1
+          imagePullPolicy: IfNotPresent
+#      restartPolicy: Always
+      
