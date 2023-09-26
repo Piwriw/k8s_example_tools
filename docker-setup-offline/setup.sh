@@ -29,11 +29,13 @@ fi
 }
 
 
-if [[ $(uname -a) == *"Ubuntu"* ]]; then
+os_release=$(cat /etc/os-release)
+
+if [[ ${os_release} == *"Ubuntu"* ]]; then
     setupUbuntu
     echo "Ubuntu"
-elif [[ -f "/etc/redhat-release" ]]; then
-   setupCentos
+elif [[ ${os_release} == *"CentOS"* ]]; then
+    setupCentos
     echo "CentOS"
 else
     echo "Unknown"
