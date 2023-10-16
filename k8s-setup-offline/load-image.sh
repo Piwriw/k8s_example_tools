@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-input_dir="images/master"
+input_dir="$1"
 
 # 遍历导出目录中的所有镜像文件
 for image_file in "$input_dir"/*.tar; do
