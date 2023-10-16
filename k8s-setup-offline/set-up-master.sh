@@ -38,9 +38,10 @@ if [ "${DOCKER_MODEL}" = "ONLINE" ]   ;then
   bash ./docker-install.sh
 fi
 
+
  bash ./homename-setup.sh ${HOSTNAME}
  bash ./docker-conf.sh
- bash ./load-image.sh
+ bash ./load-image.sh "images/master"
  bash ./k8s-setup.sh
 }
 
