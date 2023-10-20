@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-
 arch=$(uname -m)
 
 setupCentos(){
@@ -15,8 +14,9 @@ else
   echo "目前不支持，这种架构的安装模式"
 fi
 }
+
 setupUbuntu(){
-if [ "$arch" == "arm64" ]; then
+  if [[ "$arch" == "arm64" || "$arch" == "aarch64" ]]; then
   sudo  dpkg -i  ./ubuntu/arm64/*.deb
   echo "当前系统Ubuntu 为 ARM64 Docker安装完毕"
 elif [ "$arch" == "x86_64" ]; then
@@ -27,7 +27,6 @@ else
   echo "目前不支持，这种架构的安装模式"
 fi
 }
-
 
 os_release=$(cat /etc/os-release)
 
