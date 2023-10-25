@@ -8,9 +8,8 @@ mkdir -p "$output_dir"
 # 获取所有的Docker镜像列表，并遍历每个镜像
 docker images --format "{{.Repository}}:{{.Tag}}" | while read -r image; do
       tm=$(echo "$image" | rev | cut -d '/' -f 1 )
-      tag=$(echo "$tm" | cut -d ':' -f 1)
-      name=$(echo "$tm" | cut -d ':' -f 2)
+      tag=$(echo "$tm" |rev |cut -d ':' -f 1)
+      name=$(echo "$tm" |rev| cut -d ':' -f 2)
    output_file="$output_dir/${name}_${tag}.tar"
    docker save -o "$output_file" "$image"
-   echo "Saved $output_file"
 done
