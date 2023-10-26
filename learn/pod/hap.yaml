@@ -1,0 +1,30 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: php-apache
+spec:
+  # 指向的副本控制器
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: php-apache
+  # 最小
+  minReplicas: 1
+  # 最大拓展
+  maxReplicas: 10
+  #Pod指标
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          # 百分比类型
+          type: Utilization
+          averageUtilization: 50
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          # 绝对值类型
+          type:  AverageValue
+          averageValue: 100M
