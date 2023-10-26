@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: Title
+  labels:
+    app: Title
+spec:
+  containers:
+    - name: test-container
+      image: busybox
+      command: ["sh","-C"]
+      args:
+        - while true;do
+          echo -en '\n';
+          printenv MY_CPU_REQUEST MY_CPU_LIMIT;
+          printenv MY_MEM_REQUEST MY_MEM_LIMIT;
+          sleep 10;
+         done;
+      resources:
+        requests:
+          memory: "32Mi"
+          cpu: "125m"
+        limits:
+          memory: "64Mi"
+          cpu: "250m"
+      env:
+        - name: MY_CPU_REQUEST
+          valueFrom:
+            resourceFieldRef:
+              containerName: test-container
+              resource: requests.cpu
+        - name: MY_CPU_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              resource: limits.cpu
+        - name: MY_MEM_REQUEST
+          valueFrom:
+            resourceFieldRef:
+              containerName: test-container
+              resource: metadata.namespace
+        - name: MY_MEM_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              containerName: test-container
+              resource: metadata.namespace
+  restartPolicy: Always
+  
