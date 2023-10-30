@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name:  out-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  # 通过name匹配
+  name: out-service
+  # 外部服务的IP和port
+subsets:
+  - addresses:
+      - ip: 192.0.2.42
+    ports:
+      - port: 9376

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: session-service
+spec:
+  # 设置
+  sessionAffinity: ClientIP
+  # 会话保持时间
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  selector:
+    app: sessionService
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
