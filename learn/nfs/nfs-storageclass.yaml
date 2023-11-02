@@ -1,0 +1,14 @@
+apiVersion: storage.k8s.io/v1 
+kind: StorageClass 
+metadata: 
+  name: default
+  namespace: nfs       #所在名称空间
+provisioner: fuseim.pri/ifs    #存储提供者是谁 需要和上段env里指定的name下的 value:bdqn-test一致
+reclaimPolicy: Retain
+# true代表 k8s 1.11 之后允许编辑PVC 自动进行PV扩容
+allowVolumeExpansion: true
+# 挂载选选项
+#mountOptions:
+#  -
+# 存储版定模式，immediate 和 WaitForFirstConsumer。
+#volumeBindingMode:
