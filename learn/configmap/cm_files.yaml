@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: game-demo
+data:
+  # 类属性键；每一个键都映射到一个简单的值
+  player_initial_lives: "3"
+  ui_properties_file_name: "user-interface.properties"
+
+  # 类文件键
+  game.properties: |
+    enemy.types=aliens,monsters
+    player.maximum-lives=5
+  user-interface.properties: |
+    color.good=purple
+    color.bad=yellow
+    allow.textmode=true
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cm-test-app
+spec:
+  containers:
+    - name: cm-test-app
+      image: kubeguide/tomcat-app:v1
+      ports:
+        - containerPort: 8080
+      volumeMounts:
+        # 挂载的容器目录
+        - mountPath: /configfiles
+          name: serverxml
+  volumes:
+    # volume的名字
+    - name: serverxml
+      configMap:
+        #cm 的name
+        name: game-demo
+        items:
+          # cm的 key
+          - key:  game.properties
+            # 容器内文件名字
+            path: containergame.properties
+          # cm的 key
+          - key: user-interface.properties
+            # 容器内文件名字
+            path: user-xxx.properties
