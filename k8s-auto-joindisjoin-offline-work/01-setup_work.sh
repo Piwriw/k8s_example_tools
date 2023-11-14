@@ -53,6 +53,7 @@ doScript(){
         bash ./05-load-image.sh "images/work"
         bash ./06-k8s-setup.sh
         bash ./07-work-join.sh
+        bash ./09-stopwalld.sh
      elif [ "$WORK_MODEL" = "disjoin"  ]; then
         bash ./08-work-disjoin.sh
       else
