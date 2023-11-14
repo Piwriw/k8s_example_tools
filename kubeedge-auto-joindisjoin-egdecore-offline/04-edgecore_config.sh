@@ -37,6 +37,7 @@ sed -i 's/^      readOnlyPort.*/      readOnlyPort: 10250/g' /etc/kubeedge/confi
 # Update address
 sed -i 's/^      address.*/      address: 0.0.0.0/g' /etc/kubeedge/config/edgecore.yaml
 
+echo "Check EdgeCore conf ....... OK"
 }
 
 

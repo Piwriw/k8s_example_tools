@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+bashpath=$(cd `dirname $0`; pwd)
+
 ARCH=$1
 # 检查docker是否存在
 isExistedDocker(){
@@ -22,7 +24,7 @@ prepareDocker(){
 
   # Extract the docker file
   mkdir -p  $EDGESTACK_TEMP_DIR/docker
-  tar -xf ./dependence/docker.tar.gz -C $EDGESTACK_TEMP_DIR/docker
+  tar -xf ${bashpath}/dependence/docker.tar.gz -C $EDGESTACK_TEMP_DIR/docker
 
   # Change owner and group of docker_setup
   chown root:root $EDGESTACK_TEMP_DIR/docker/setup.sh

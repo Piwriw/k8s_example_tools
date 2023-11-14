@@ -17,6 +17,7 @@ export EDGESTACK_TEMP_DIR="$EDGESTACK_TEMP_DIR"
 edgecore_model=$1
 EDGESTACK_ARCH=$(cat ./dependence/arch.txt)
 
+bashpath=$(cd `dirname $0`; pwd)
 checkARCH(){
 
    formatted_arch=$(uname -m)
@@ -38,14 +39,14 @@ checkARCH(){
 
 doExec(){
   if [ "$edgecore_model" = "join" ]; then
-    bash ./01-docker_install.sh $EDGESTACK_ARCH
-    bash ./02-docker_config.sh
-    bash ./03-edgecore_install.sh
-    bash ./04-edgecore_config.sh
-    bash ./05-stopwalld.sh
-    bash ./06-edgecore_join.sh
+    bash ${bashpath}/01-docker_install.sh $EDGESTACK_ARCH
+    bash ${bashpath}/02-docker_config.sh
+    bash ${bashpath}/03-edgecore_install.sh
+    bash ${bashpath}/04-edgecore_config.sh
+    bash ${bashpath}/05-stopwalld.sh
+    bash ${bashpath}/06-edgecore_join.sh
   elif [ "$edgecore_model" = "disjoin"  ]; then
-    bash ./07-edgecore_disjoin.sh
+    bash ${bashpath}/07-edgecore_disjoin.sh
   else
     echo "NO Command ,$edgecore_model"
   fi

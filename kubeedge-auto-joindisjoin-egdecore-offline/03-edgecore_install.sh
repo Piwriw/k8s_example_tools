@@ -1,12 +1,9 @@
 #!/bin/bash
 set -e
 
-#printEnv() {
-#    echo "已设置环境变量参数："
-#    echo "MINIO_PATH="${MINIO_PATH}
-#    echo "KUBEEDGE_VERSION="${KUBEEDGE_VERSION}
-#    echo ""
-#}
+
+bashpath=$(cd `dirname $0`; pwd)
+
 isExistEdgecore(){
     set +e
     edgecore -h > /dev/null 2>&1
@@ -25,7 +22,7 @@ prepareEdgecore(){
     # 生成edgecore工作目录
     mkdir -p /etc/kubeedge
     # Extract the edgecore file
-    tar -xf "./dependence/edgecore.tar.gz" -C $EDGESTACK_TEMP_DIR
+    tar -xf "${bashpath}/dependence/edgecore.tar.gz" -C $EDGESTACK_TEMP_DIR
 
     # Move the edgecore file
     mv $EDGESTACK_TEMP_DIR/edgecore /usr/local/bin/edgecore
@@ -37,7 +34,7 @@ prepareEdgecore(){
     # Move the edgecore.service file
     mv $EDGESTACK_TEMP_DIR/edgecore.service /etc/systemd/system/edgecore.service
 
-
+    echo "EdgeCore Install.......OK"
 }
 
 #下载对应Edgecore安装包
