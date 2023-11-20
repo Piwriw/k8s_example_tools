@@ -20,8 +20,8 @@ doImageExport() {
 mkdir -p "${OUTPUTDIR}"
   kubectl get pods -n ${NAMESPACE} -o jsonpath="{.items[*].spec.containers[*].image}"| tr -s '[[:space:]]' '\n' | sort | uniq | while read -r image; do
     tm=$(echo "$image" | rev | cut -d '/' -f 1)
-    tag=$(echo "$tm" |rev |cut -d ':' -f 1)
-    name=$(echo "$tm" |rev| cut -d ':' -f 2)
+    name=$(echo "$tm" |rev |cut -d ':' -f 1)
+    tag=$(echo "$tm" |rev| cut -d ':' -f 2)
     output_file="$OUTPUTDIR/${name}_${tag}.tar"
     docker save -o "$output_file" "$image"
     echo "$output_file has Exported"
