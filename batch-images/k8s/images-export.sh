@@ -23,6 +23,7 @@ mkdir -p "${OUTPUTDIR}"
     name=$(echo "$tm" |rev |cut -d ':' -f 1)
     tag=$(echo "$tm" |rev| cut -d ':' -f 2)
     output_file="$OUTPUTDIR/${name}_${tag}.tar"
+    docker pull "$image"
     docker save -o "$output_file" "$image"
     echo "$output_file has Exported"
   done
