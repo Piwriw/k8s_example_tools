@@ -1,0 +1,40 @@
+apiVersion: apps/v1                 #版本
+kind: Deployment                    #创建资源的类型
+metadata:                           #资源的元数据
+  name: mysql-dep                   #资源的名称，是元数据必填项
+spec:                               #期望状态
+  replicas: 1                       #创建的副本数量（pod数量），不填默认为1
+  selector:                         #
+    matchLabels:
+      app: mysql-pod
+  template:                         #定义pod的模板
+    metadata:                       #pod的元数据
+      labels:                       #labels标签，必填一个
+        app: mysql-pod
+    spec:                           #pod的期望状态
+      containers:                   #容器
+        - name: mysql                 #容器名称
+          image: mysql:8.0.26       #镜像
+          imagePullPolicy: IfNotPresent
+          ports:                      #容器的端口
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "root"
+---
+apiVersion: v1                      #版本
+kind: Service                       #创建资源的类型
+metadata:                           #资源的元数据
+  name: mysql-svc                   #资源的名称，是元数据必填项
+  labels:                           #labels标签
+    app: mysql-svc
+spec:                               #期望状态
+  type: NodePort                    #服务类型
+  ports:                            #端口
+    - port: 3306
+      targetPort: 3306              #与containerPort一样
+      protocol: TCP
+      nodePort: 30306
+  selector:
+    app: mysql-pod
+
