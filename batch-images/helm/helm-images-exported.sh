@@ -24,10 +24,9 @@ doImageExport(){
        name=$(echo "$tm" |rev |cut -d ':' -f 1)
        tag=$(echo "$tm" |rev| cut -d ':' -f 2)
        output_file="$OUTPUTDIR/${name}_${tag}.tar"
-#       docker pull "$line"
-       echo "${output_file}"
-#       docker save -o "$output_file" "$line"
-#       echo "$output_file has Exported"
+       docker pull "$line"
+       docker save -o "$output_file" "$line"
+       echo "$output_file has Exported"
 
 
       # 或其他操作
