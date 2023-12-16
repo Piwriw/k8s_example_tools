@@ -4,7 +4,7 @@ set -e
 cp ./dependence/docker_arm64.tar.gz ./dependence/docker.tar.gz
 cp ./dependence/edgecore_arm64_1-12-x.tar.gz ./dependence/edgecore.tar.gz
 cp ./arm64-version.txt ./dependence/arch.txt
-cp ../../build/docker_daemon_utils.arm64 ./dependence/docker_daemon_utils
+cp ./build/docker_daemon_utils.arm64 ./dependence/docker_daemon_utils
 tar -czvf nodedeploy-arm64-1.12.tar.gz \
          edgecore-setup.sh \
           01-docker_install.sh  \
@@ -28,7 +28,7 @@ rm -rf ./dependence/docker_daemon_utils
 cp ./dependence/docker_amd64.tar.gz ./dependence/docker.tar.gz
 cp ./dependence/edgecore_x86_1-12-x.tar.gz ./dependence/edgecore.tar.gz
 cp ./x86-version.txt ./dependence/arch.txt
-cp ../../build/docker_daemon_utils.amd64 ./dependence/docker_daemon_utils
+cp ./build/docker_daemon_utils.amd64 ./dependence/docker_daemon_utils
 tar -czvf nodedeploy-amd64-1.12.tar.gz \
          edgecore-setup.sh \
           01-docker_install.sh  \
@@ -52,7 +52,7 @@ rm -rf   ./dependence/docker_daemon_utils
 cp ./dependence/docker_arm64.tar.gz ./dependence/docker.tar.gz
 cp ./dependence/edgecore_arm64_1-7-x.tar.gz ./dependence/edgecore.tar.gz
 cp ./arm64-version.txt ./dependence/arch.txt
-cp ../../build/docker_daemon_utils.arm64 ./dependence/docker_daemon_utils
+cp ./build/docker_daemon_utils.arm64 ./dependence/docker_daemon_utils
 tar -czvf nodedeploy-arm64-1.7.tar.gz \
          edgecore-setup.sh \
           01-docker_install.sh  \
@@ -76,7 +76,7 @@ rm -rf  ./dependence/docker_daemon_utils
 cp ./dependence/docker_amd64.tar.gz ./dependence/docker.tar.gz
 cp ./dependence/edgecore_x86_1-7-x.tar.gz ./dependence/edgecore.tar.gz
 cp ./x86-version.txt ./dependence/arch.txt
-cp ../../build/docker_daemon_utils.amd64 ./dependence/docker_daemon_utils
+cp ./build/docker_daemon_utils.amd64 ./dependence/docker_daemon_utils
 tar -czvf nodedeploy-amd64-1.7.tar.gz \
          edgecore-setup.sh \
           01-docker_install.sh  \
