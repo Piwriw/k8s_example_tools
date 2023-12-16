@@ -10,6 +10,7 @@ output_dir="images"
 mkdir -p "$output_dir"
 
 # 获取所有的K8s集群在使用镜像列表，并遍历每个镜像
+# kubeadm config images list
 # 不包括 pause镜像，pause在启动Pod的时候会用到
 kubectl get pods --all-namespaces -o jsonpath="{..image}" | tr -s '[:space:]' '\n' | sort -u  | while read -r image; do
       tm=$(echo "$image" | rev | cut -d '/' -f 1 )
