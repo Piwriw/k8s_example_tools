@@ -1,0 +1,137 @@
+# done
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: mysql
+  name: mysql
+  namespace: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  serviceName: mysql-headless
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      nodeSelector: {}
+#        role: cloud
+      containers:
+      - args:
+        - --defaults-file=/etc/mysql-conf/my.cnf
+        - --user=root
+        env:
+        - name: DBNAME
+          value: edgestack
+        - name: MYSQL_ROOT_PASSWORD
+          value: Piwriw503420.
+        - name: MYSQL_USER_HOST
+          value: '%'
+        - name: MYSQL_ROOT_HOST
+          value: '%'
+        - name: MYSQL_PORT
+          value: "3306"
+        - name: TZ
+          value: Asia/Shanghai
+        - name: LANG
+          value: en_US.UTF-8
+        image: mysql:8.0.26
+        imagePullPolicy: IfNotPresent
+        name: mysql
+        ports:
+        - containerPort: 3306
+          name: mysql
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: mysql-data
+        - mountPath: /etc/mysql-conf
+          name: mysql-conf
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 600
+      volumes:
+      - persistentVolumeClaim:
+          claimName: mysql-data
+        name: mysql-data
+      - configMap:
+          name: mysql-conf
+        name: mysql-conf
+  updateStrategy:
+    type: RollingUpdate
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-data
+  namespace: mysql
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: ""
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-5g
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/pv/mysql-5g"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-headless
+  namespace: mysql
+spec:
+  clusterIP: None
+  ports:
+  - port: 3306
+    targetPort: 3306
+  selector:
+    app: mysql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-svc
+  namespace: mysql
+spec:
+  ports:
+  - port: 3306
+    targetPort: 3306
+    nodePort: 30360
+  selector:
+    app: mysql
+  type: NodePort
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-conf
+  namespace: mysql
+data:
+  my.cnf: |-
+    [mysqld]
+    pid-file        = /var/run/mysqld/mysqld.pid
+    socket          = /var/run/mysqld/mysqld.sock
+    datadir         = /var/lib/mysql
+    secure-file-priv= NULL
+    skip-host-cache
+    skip-name-resolve
+    binlog-format="ROW"
+    log-bin=/var/lib/mysql/binlog
+    server-id=1
+    sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'
