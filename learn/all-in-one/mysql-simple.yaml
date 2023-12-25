@@ -1,7 +1,7 @@
 apiVersion: apps/v1                 #版本
 kind: Deployment                    #创建资源的类型
 metadata:                           #资源的元数据
-  name: mysql-dep                   #资源的名称，是元数据必填项
+  name: mysql-deployment                 #资源的名称，是元数据必填项
 spec:                               #期望状态
   replicas: 1                       #创建的副本数量（pod数量），不填默认为1
   selector:                         #
