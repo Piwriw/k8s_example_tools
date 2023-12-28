@@ -8,11 +8,11 @@ filename=$(basename "$url")
 
 
 installGo(){
-if [ "$arch" == "arm64" ]; then
+if [ "$arch" == "arm64" ] || [ "$arch" == "aarch64" ]; then
   url=$(echo "$url" | sed "s/amd64/arm64/")
   echo "当前系统 为 ARM64 Go安装完毕"
-elif [ "$arch" == "x86_64" ]; then
-  echo "当前系统Centos 为 AMD64 (x86_64) Docker安装完毕"
+elif [ "$arch" == "x86_64" ] || "$arch" == "amd64"; then
+  echo "当前系统Centos 为 AMD64 (x86_64) Go安装完毕"
 else
   echo "当前系统架构为 $arch"
   echo "目前不支持，这种架构的安装模式"
