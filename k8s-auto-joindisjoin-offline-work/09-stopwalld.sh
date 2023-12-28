@@ -1,5 +1,8 @@
 #!/bin/bash
 
+swapoff -a
+sed -i 's/.*swap.*/#&/' /etc/fstab
+
 # Disable SELinux
 sed -i 's/^SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
 setenforce 0
