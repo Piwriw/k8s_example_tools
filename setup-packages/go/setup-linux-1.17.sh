@@ -31,7 +31,7 @@ setupGo(){
  source /etc/profile
 
  # 更换代理源
- export GOPROXY=https://mirrors.aliyun.com/goproxy/
+export GOPROXY=https://proxy.golang.com.cn,direct
  # 开启go mod
  export GO111MODULE=on
  go version
