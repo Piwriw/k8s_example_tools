@@ -2,14 +2,13 @@
 set -e
 
 arch=$(uname -m)
-
-url="https://studygolang.com/dl/golang/go1.17.linux-amd64.tar.gz"
-filename=$(basename "$url")
+version=$1
+url="https://studygolang.com/dl/golang/go$version.linux-$arch.tar.gz"
 
 
 installGo(){
 if [ "$arch" == "arm64" ] || [ "$arch" == "aarch64" ]; then
-  url=$(echo "$url" | sed "s/amd64/arm64/")
+  arch="arm64"
   echo "当前系统 为 ARM64 Go安装完毕"
 elif [ "$arch" == "x86_64" ] || "$arch" == "amd64"; then
   echo "当前系统Centos 为 AMD64 (x86_64) Go安装完毕"
@@ -19,8 +18,7 @@ else
 fi
 
 filename=$(basename "$url")
-yum install -y wget
-wget $url
+curl $url
 }
 
 setupGo(){
