@@ -5,4 +5,4 @@ set -e
 systemctl stop edgecore
 
 # Delete file example
-rm -rf /etc/kubeedge/config/edgecore.yaml
+rm -rf /etc/kubeedge

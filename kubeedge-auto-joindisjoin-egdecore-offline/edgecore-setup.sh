@@ -22,7 +22,7 @@ checkARCH(){
 
    formatted_arch=$(uname -m)
     if [[ $formatted_arch == "x86_64" || $formatted_arch == "amd64" ]]; then
-        formatted_arch="x86"
+        formatted_arch="amd64"
     elif [[ $formatted_arch == "aarch64" ]]; then
         formatted_arch="arm64"
     fi

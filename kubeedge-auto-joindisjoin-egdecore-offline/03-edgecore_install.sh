@@ -37,31 +37,5 @@ prepareEdgecore(){
     echo "EdgeCore Install.......OK"
 }
 
-#下载对应Edgecore安装包
-#installEdgecore(){
-#  isExistEdgecore
-#  formatted_arch=$(uname -m)
-#  if [[ $formatted_arch == "x86_64" || $formatted_arch == "amd64" ]]; then
-#      formatted_arch="x86"
-#  elif [[ $formatted_arch == "aarch64" ]]; then
-#      formatted_arch="arm64"
-#  fi
-#  edgecore_filename="edgecore_${formatted_arch}_${KUBEEDGE_VERSION}.tar.gz"
-#
-#  # Ensure destination directory exists
-#  mkdir -p /opt/edgecore
-#
-#  # Download docker file from minio
-#  wget -O /opt/edgecore.tar.gz "${MINIO_PATH}/edgestack-setup-v2/edgecore/${edgecore_filename}"
-#
-#  chmod 0644 "/opt/edgecore.tar.gz"
-#}
-
-
-#if [ ${#MINIO_PATH} -eq 0 ] ||  [ ${#KUBEEDGE_VERSION} -eq 0 ] ; then
-#    echo -e "\033[31;1m缺少环境变量参数 \033[0m"
-#    printEnv
-#    exit 1
-#fi
 
 isExistEdgecore
