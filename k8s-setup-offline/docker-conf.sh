@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+
 
 # 关闭 防火墙
 systemctl stop firewalld
