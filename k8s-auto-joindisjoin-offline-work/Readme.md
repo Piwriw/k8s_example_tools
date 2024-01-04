@@ -18,6 +18,9 @@ export MASTERIP=172.16.8.31:6443
 export TOKEN=xxx
 export DISCOVERY_TOKEN_CA_CERT_HASH=sha256:xxx
 export DOCKER_MODEL=ONLINE | export DOCKER_MODEL=OFFLINE
+export HARBOR_ADDR=https://10.10.124.19:30003
+export HARBOR_USER=admin
+export HARBOR_PASSWD=Harbor12345
 ```
 ```bash
 # 节点上线
