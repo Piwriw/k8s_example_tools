@@ -98,7 +98,7 @@ expose:
 # the IP address of k8s node
 #
 # If Harbor is deployed behind the proxy, set it as the URL of proxy
-externalURL: https://172.16.158.4:30003
+externalURL: https://10.10.101.159:30003
 
 # The persistence is enabled by default and a default StorageClass
 # is needed in the k8s cluster to provision volumes dynamicly.
@@ -283,7 +283,7 @@ nginx:
   #    memory: 256Mi
   #    cpu: 100m
   nodeSelector: 
-    kubernetes.io/hostname: hc-aistack-work01
+    harbor: work
   tolerations:
     - key: "yunbian"
       operator: "Equal"
@@ -303,7 +303,7 @@ portal:
 #    memory: 256Mi
 #    cpu: 100m
   nodeSelector: 
-    kubernetes.io/hostname: hc-aistack-work01
+    harbor: work
   tolerations:
     - key: "yunbian"
       operator: "Equal"
@@ -326,7 +326,7 @@ core:
 #    memory: 256Mi
 #    cpu: 100m
   nodeSelector: 
-    kubernetes.io/hostname: hc-aistack-work01
+    harbor: work
   tolerations:
     - key: "yunbian"
       operator: "Equal"
@@ -368,7 +368,7 @@ jobservice:
 #     memory: 256Mi
 #     cpu: 100m
   nodeSelector: 
-    kubernetes.io/hostname: hc-aistack-work01
+    harbor: work
   tolerations:
     - key: "yunbian"
       operator: "Equal"
@@ -403,7 +403,7 @@ registry:
     #    cpu: 100m
   replicas: 1
   nodeSelector: 
-    kubernetes.io/hostname: hc-aistack-work01
+    harbor: work
   tolerations:
     - key: "yunbian"
       operator: "Equal"
@@ -445,7 +445,7 @@ chartmuseum:
   #    memory: 256Mi
   #    cpu: 100m
   nodeSelector: 
-    kubernetes.io/hostname: hc-aistack-work01
+    harbor: work
   tolerations:
     - key: "yunbian"
       operator: "Equal"
@@ -478,7 +478,7 @@ clair:
   # disable the updaters
   updatersInterval: 12
   nodeSelector: 
-    kubernetes.io/hostname: hc-aistack-work01
+    harbor: work
   tolerations:
     - key: "yunbian"
       operator: "Equal"
@@ -509,7 +509,7 @@ notary:
     #    memory: 256Mi
     #    cpu: 100m
   nodeSelector: 
-    kubernetes.io/hostname: hc-aistack-work01
+    harbor: work
   tolerations:
     - key: "yunbian"
       operator: "Equal"
@@ -540,8 +540,8 @@ database:
     #  requests:
     #    memory: 256Mi
     #    cpu: 100m
-    nodeSelector: 
-      kubernetes.io/hostname: hc-aistack-work01
+    nodeSelector:
+      harbor: work
     tolerations:
     - key: "yunbian"
       operator: "Equal"
@@ -598,8 +598,8 @@ redis:
     #  requests:
     #    memory: 256Mi
     #    cpu: 100m
-    nodeSelector: 
-      kubernetes.io/hostname: hc-aistack-work01
+    nodeSelector:
+      harbor: work
     tolerations:
     - key: "yunbian"
       operator: "Equal"
