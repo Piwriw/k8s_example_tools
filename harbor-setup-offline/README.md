@@ -2,7 +2,7 @@
 ## 安装
 ### 修改value
 - externalURL: harbor地址
-- nodeSelector: 指定节点
+- kubectl label node harbor=work ,Habbor调度节点
 ```bash
 helm upgrade --install harbor helm -n harbor
 ```

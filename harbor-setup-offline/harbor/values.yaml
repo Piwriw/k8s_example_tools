@@ -240,9 +240,9 @@ imagePullSecrets:
 #  - name: docker-registry-secret
 #  - name: internal-registry-secret
 
-# The update strategy for deployments with persistent volumes(jobservice, registry 
+# The update strategy for deployments with persistent volumes(jobservice, registry
 # and chartmuseum): "RollingUpdate" or "Recreate"
-# Set it as "Recreate" when "RWM" for volumes isn't supported 
+# Set it as "Recreate" when "RWM" for volumes isn't supported
 updateStrategy:
   type: RollingUpdate
 
@@ -282,13 +282,9 @@ nginx:
   #  requests:
   #    memory: 256Mi
   #    cpu: 100m
-  nodeSelector: 
+  nodeSelector:
     harbor: work
-  tolerations:
-    - key: "yunbian"
-      operator: "Equal"
-      value: "true"
-      effect: "NoSchedule"
+  tolerations: []
   affinity: {}
   ## Additional deployment annotations
   podAnnotations: {}
@@ -302,13 +298,9 @@ portal:
 #  requests:
 #    memory: 256Mi
 #    cpu: 100m
-  nodeSelector: 
+  nodeSelector:
     harbor: work
-  tolerations:
-    - key: "yunbian"
-      operator: "Equal"
-      value: "true"
-      effect: "NoSchedule"
+  tolerations: []
   affinity: {}
   ## Additional deployment annotations
   podAnnotations: {}
@@ -325,13 +317,9 @@ core:
 #  requests:
 #    memory: 256Mi
 #    cpu: 100m
-  nodeSelector: 
+  nodeSelector:
     harbor: work
-  tolerations:
-    - key: "yunbian"
-      operator: "Equal"
-      value: "true"
-      effect: "NoSchedule"
+  tolerations: []
   affinity: {}
   ## Additional deployment annotations
   podAnnotations: {}
@@ -367,13 +355,9 @@ jobservice:
 #   requests:
 #     memory: 256Mi
 #     cpu: 100m
-  nodeSelector: 
+  nodeSelector:
     harbor: work
-  tolerations:
-    - key: "yunbian"
-      operator: "Equal"
-      value: "true"
-      effect: "NoSchedule"
+  tolerations: []
   affinity: {}
   ## Additional deployment annotations
   podAnnotations: {}
@@ -402,13 +386,9 @@ registry:
     #    memory: 256Mi
     #    cpu: 100m
   replicas: 1
-  nodeSelector: 
+  nodeSelector:
     harbor: work
-  tolerations:
-    - key: "yunbian"
-      operator: "Equal"
-      value: "true"
-      effect: "NoSchedule"
+  tolerations: []
   affinity: {}
   ## Additional deployment annotations
   podAnnotations: {}
@@ -444,13 +424,9 @@ chartmuseum:
   #  requests:
   #    memory: 256Mi
   #    cpu: 100m
-  nodeSelector: 
+  nodeSelector:
     harbor: work
-  tolerations:
-    - key: "yunbian"
-      operator: "Equal"
-      value: "true"
-      effect: "NoSchedule"
+  tolerations: []
   affinity: {}
   ## Additional deployment annotations
   podAnnotations: {}
@@ -477,13 +453,9 @@ clair:
   # The interval of clair updaters, the unit is hour, set to 0 to
   # disable the updaters
   updatersInterval: 12
-  nodeSelector: 
+  nodeSelector:
     harbor: work
-  tolerations:
-    - key: "yunbian"
-      operator: "Equal"
-      value: "true"
-      effect: "NoSchedule"
+  tolerations: []
   affinity: {}
   ## Additional deployment annotations
   podAnnotations: {}
@@ -508,13 +480,9 @@ notary:
     #  requests:
     #    memory: 256Mi
     #    cpu: 100m
-  nodeSelector: 
+  nodeSelector:
     harbor: work
-  tolerations:
-    - key: "yunbian"
-      operator: "Equal"
-      value: "true"
-      effect: "NoSchedule"
+  tolerations: []
   affinity: {}
   ## Additional deployment annotations
   podAnnotations: {}
@@ -542,11 +510,7 @@ database:
     #    cpu: 100m
     nodeSelector:
       harbor: work
-    tolerations:
-    - key: "yunbian"
-      operator: "Equal"
-      value: "true"
-      effect: "NoSchedule"
+    tolerations: []
     affinity: {}
     initContainer:
       migrator: {}
@@ -600,11 +564,7 @@ redis:
     #    cpu: 100m
     nodeSelector:
       harbor: work
-    tolerations:
-    - key: "yunbian"
-      operator: "Equal"
-      value: "true"
-      effect: "NoSchedule"
+    tolerations: []
     affinity: {}
   external:
     host: "192.168.0.2"
