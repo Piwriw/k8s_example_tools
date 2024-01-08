@@ -7,6 +7,8 @@
 |         |         |                                                      |
 
 ## 使用指南
+需要先手动安装Docker
+
 ```bash
 # 会输出 需要执行的配置项目 set-up master
 bash set-up-master.sh 

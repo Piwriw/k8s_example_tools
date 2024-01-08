@@ -26,7 +26,6 @@ echo "net.bridge.bridge-nf-call-iptables = 1" >> /etc/sysctl.conf
 # 执行命令以应用
 sysctl -p
 
-docker version
 
 # 修改docker Cgroup Driver为systemd
 # 如果不修改，在添加 worker 节点时可能会碰到如下错误
@@ -36,8 +35,7 @@ docker version
 
 # 设置docker  cgroupdriver=systemd 和镜像仓库
 touch /etc/docker/daemon.json
-echo '{ "exec-opts": ["native.cgroupdriver=systemd"],  "registry-mirrors": ["https://dpp4jnvf.mirror.aliyuncs.com"],"insecure-registries": ["0.0.0.0/0"]}'> /etc/docker/daemon.json
-systemctl restart docker
+echo '{ "exec-opts": ["native.cgroupdriver=systemd"],  "registry-mirrors": ["https://dpp4jnvf.mirror.aliyuncs.com","https://dockerproxy.com"],"insecure-registries": ["0.0.0.0/0"]}'> /etc/docker/daemon.json
 
 # 设置 docker 镜像，提高 docker 镜像下载速度和稳定性
 # 如果您访问 https://hub.docker.io 速度非常稳定，亦可以跳过这个步骤
