@@ -20,7 +20,10 @@ func main() {
 	}
 	dockerConfig.ExecOpts = CheckConfig(dockerConfig.ExecOpts, "native.cgroupdriver=systemd")
 	dockerConfig.InsecureRegistries = CheckConfig(dockerConfig.InsecureRegistries, "0.0.0.0/0")
-	dockerConfig.RegistryMirrors = CheckConfig(dockerConfig.RegistryMirrors, os.Getenv("HARBOR_ADDR"))
+	HARBOR_ADDR := os.Getenv("HARBOR_ADDR")
+	if HARBOR_ADDR != "" {
+		dockerConfig.RegistryMirrors = CheckConfig(dockerConfig.RegistryMirrors, os.Getenv("HARBOR_ADDR"))
+	}
 
 	daemonSourceMap["exec-opts"] = dockerConfig.ExecOpts
 	daemonSourceMap["insecure-registries"] = dockerConfig.InsecureRegistries
