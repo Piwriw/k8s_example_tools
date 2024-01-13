@@ -10,7 +10,7 @@ helm pull  gpu-helm-charts/dcgm-
 # 注意修改 value.yaml 的nodeSelector 使用 label 不然会给当前所有集群所有节点起一个Pod，造成拉取镜像到浪费
 # example: 
 #nodeSelector: {
-#     prom: gpu
+#      gpu=work
 #}  
 
 # 3.部署dcgm
