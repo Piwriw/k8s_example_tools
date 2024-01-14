@@ -134,7 +134,7 @@ serviceMonitor:
        action: replace
 
 nodeSelector: {
-     prom: gpu
+     gpu: work
 }
   #node: gpu
 
