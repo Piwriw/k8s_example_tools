@@ -13,7 +13,11 @@
 | [k8s-setup-v2-online](https://github.com/Piwriw/k8s_example_tools/tree/master/k8s-setup-v2-online) | 在线部署K8s                                          |
 | [kubeedge-auto-joindisjoin-egdecore-offline](https://github.com/Piwriw/k8s_example_tools/tree/master/kubeedge-auto-joindisjoin-egdecore-offline) | Kueedge 离线 edgecore all-in-one shell 部署          |
 | [learn](https://github.com/Piwriw/k8s_example_tools/tree/master/learn) | K8s yaml学习                                         |
-| [prometheus-offline](https://github.com/Piwriw/k8s_example_tools/tree/master/prometheus-offline) | prometheus离线部署（heml）                           |
+| [nfs-subdir-external-provisioner](https://github.com/Piwriw/k8s_example_tools/tree/master/nfs-subdir-external-provisioner) | Nfs StoragesClass部署                                |
+| [prometheus-offline](https://gitub.com/Piwriw/k8s_example_tools/tree/master/prometheus-offline) | prometheus离线部署（heml）                           |
 | [prometheus-online](https://github.com/Piwriw/k8s_example_tools/tree/master/prometheus-online) | prometheus在线部署（helm）                           |
 | [setup-packages](https://github.com/Piwriw/k8s_example_tools/tree/master/setup-packages) | 各种编程的linux部署                                  |
 | [linux-tools](https://github.com/Piwriw/k8s_example_tools/tree/master/linux-tools) | linux的一些操作                                      |
+| [minio-setup-offline](https://github.com/Piwriw/k8s_example_tools/tree/master/minio-setup-offline) | minio部署                                            |
+| [harbor-setup-offline-v2](https://github.com/Piwriw/k8s_example_tools/tree/master/harbor-setup-offline-v2) | Harbor部署                                           |
+| [filesys](https://github.com/Piwriw/k8s_example_tools/tree/master/filesys) | K8s Local StoragesClass部署                          |
