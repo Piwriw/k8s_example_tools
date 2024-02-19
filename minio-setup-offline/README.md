@@ -3,7 +3,7 @@
 ## 配置项目
 minio:
 账户：admin
-密码：admin
+密码：admin123
 手动PV：
 需要给挂载路径添加`chmod 777 `，不然会报错
 ## 部署
