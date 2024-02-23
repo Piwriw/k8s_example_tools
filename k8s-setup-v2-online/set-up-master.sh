@@ -6,7 +6,7 @@ usage() {
     echo "导入以下参数再执行setup_master"
     echo "export HOSTNAME=k8s-master"
     echo "export MASTER_IP=10.10.102.88"
-    echo "export K8S_VERSION=v1.21.4"
+    echo "export K8S_VERSION=v1.21.14"
     echo "export POD_SUBNET=192.168.0.0/16"
     echo ""
 }
@@ -46,7 +46,6 @@ kubectl apply -f https://docs.projectcalico.org/v3.10/manifests/calico.yaml
 kubectl get po -A
 }
 
-settime
 
 if [ ${#HOSTNAME} -eq 0 ] || [ ${#MASTER_IP} -eq 0 ]||[ ${#POD_SUBNET} -eq 0 ]||[ ${#K8S_VERSION} -eq 0 ]; then
     usage
@@ -54,6 +53,7 @@ if [ ${#HOSTNAME} -eq 0 ] || [ ${#MASTER_IP} -eq 0 ]||[ ${#POD_SUBNET} -eq 0 ]||
     printEnv
     exit 1
 fi
+settime
 
 doScript
 setupMaster

@@ -36,7 +36,8 @@ docker version
 
 # 设置docker  cgroupdriver=systemd 和镜像仓库
 touch /etc/docker/daemon.json
-echo '{ "exec-opts": ["native.cgroupdriver=systemd"],  "registry-mirrors": ["https://dpp4jnvf.mirror.aliyuncs.com"]}' > /etc/docker/daemon.json
+
+echo '{ "exec-opts": ["native.cgroupdriver=systemd"],  "registry-mirrors": ["http://192.168.31:30003","https://192.168.31:30003","https://dpp4jnvf.mirror.aliyuncs.com"],"insecure-registries": ["0.0.0.0/0"]}' > /etc/docker/daemon.json
 systemctl restart docker
 
 # 设置 docker 镜像，提高 docker 镜像下载速度和稳定性
