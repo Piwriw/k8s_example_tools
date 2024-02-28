@@ -13,4 +13,9 @@ kubectl apply -f harbor/harbor.pvc.yaml
 
 会出现权限问题
 需要 chmod 777 *
+  chmod 777  /pv/harbor-200g-1
+  chmod 777  /pv/harbor-5-1
+  chmod 777  /pv/harbor-5g-2
+  chmod 777 /pv/harbor-1g-1
+  chmod 777 /pv/harbor-30g-1
 ```
