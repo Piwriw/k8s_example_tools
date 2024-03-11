@@ -2,14 +2,14 @@ replicaCount: 1
 strategyType: Recreate
 
 image:
-  repository: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner
+  repository: k8s.dockerproxy.com/sig-storage/nfs-subdir-external-provisioner
   tag: v4.0.2
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 
 nfs:
-  server: 10.10.101.159
-  path: /nfs-storage
+  server: 10.10.101.124
+  path: /data/nfs_root
   mountOptions:
   volumeName: nfs-subdir-external-provisioner-root
   # Reclaim policy for the main nfs volume
@@ -104,7 +104,15 @@ nodeSelector: {}
 
 tolerations: []
 
-affinity: {}
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: "nfs"
+              operator: In
+              values:
+                - "work"
 
 # Additional labels for any resource created
 labels: {}
