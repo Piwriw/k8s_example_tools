@@ -10,6 +10,7 @@ if [[ "$arch" == "arm64" || "$arch" == "aarch64" ]]; then
   arch="arm64"
   echo "当前系统为 ARM64，Go安装完毕"
 elif [[ "$arch" == "x86_64" || "$arch" == "amd64" ]]; then
+  arch="amd64"
   echo "当前系统Centos为 AMD64 (x86_64)，Go安装完毕"
 else
   echo "当前系统架构为 $arch"
