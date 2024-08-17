@@ -93,11 +93,19 @@ update_path_and_check() {
     fi
 }
 
-# 配置pip使用阿里云镜像源
+# 配置pip使用阿里云镜像源（当pip3版本大于10.0.0时）
 configure_pip_mirror() {
-    log "Configuring pip to use Aliyun mirror..."
-    if ! pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple/; then
-        error "Failed to configure pip mirror. Please check your pip configuration."
+    log "Checking pip version..."
+    pip_version=$(pip3 --version | awk '{print $2}')
+    pip_version_major_minor=$(echo "$pip_version" | awk -F. '{print $1"."$2}')
+
+    if [[ "$(echo "$pip_version_major_minor > 10.0" | bc)" -eq 1 ]]; then
+        log "Configuring pip to use Aliyun mirror..."
+        if ! pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple/; then
+            error "Failed to configure pip mirror. Please check your pip configuration."
+        fi
+    else
+        log "pip version ($pip_version) is not greater than 10.0. Skipping mirror configuration."
     fi
 }
 
