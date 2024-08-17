@@ -24,7 +24,7 @@ error() {
 # 检查并获取Python版本
 get_python_version() {
     if [[ $# -ne 1 ]] || [[ $1 != --version=* ]]; then
-        read -p "Please enter the Python version you want to install (e.g., --version=3.9.0): " PYTHON_VERSION
+        read -p "Please enter the Python version you want to install (e.g., 3.9.0): " PYTHON_VERSION
         if [[ -z "$PYTHON_VERSION" ]]; then
             error "Python version cannot be empty."
         fi
@@ -81,8 +81,15 @@ update_path_and_check() {
         source ~/.bashrc
     fi
 
-    if ! python3 -V || ! pip3 -V; then
-        error "Python or pip installation failed. Please check the installation process."
+    # 检查Python版本是否与用户输入的一致
+    installed_version=$(python3 -V 2>&1 | awk '{print $2}')
+    if [[ "$installed_version" != "$PYTHON_VERSION" ]]; then
+        error "Installed Python version ($installed_version) does not match the requested version ($PYTHON_VERSION)."
+        log "Maybe You should Remove Your Old Python3 Before"
+    fi
+
+    if ! pip3 -V; then
+        error "pip installation failed. Please check the installation process."
     fi
 }
 
