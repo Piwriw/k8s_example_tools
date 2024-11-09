@@ -15,6 +15,8 @@ password: admin
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm pull bitnami/rabbitmq 
-kubectl apply -f rabbitmq/rabbitmq-pvc.yaml    
-chmod 777 rabbitmq-8g
+ helm upgrade --install  rabbitmq rabbitmq -n rabbitmq --create-namespace 
+
+kubectl apply rabbitmq-pvc.yaml  
+chmod 777 /pv/rabbitmq-8g
 ```
