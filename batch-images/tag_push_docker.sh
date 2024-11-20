@@ -15,6 +15,13 @@ fi
 
 # 当前处理的文件计数器
 FILE_COUNT=0
+cleanImages() {
+    local tagName=$1
+    local loadImage=$2
+    docker rmi "$tagName"
+    docker rmi "$loadImage"
+    echo "Progress: Cleaning image: $tagName $loadImag "
+}
 
 # 遍历目录下的所有 .tar 文件
 for IMAGE_FILE in "$IMAGE_DIR"/*.tar; do
@@ -42,22 +49,15 @@ for IMAGE_FILE in "$IMAGE_DIR"/*.tar; do
             echo "Pushing image: $NEW_TAG"
             docker push "$NEW_TAG"
 
+            # 显示推送进度
+            echo "Progress: $FILE_COUNT/${TOTAL_FILES// /} images processed. Current image: ${NEW_TAG}  "
             # 清理本地镜像
             cleanImages "$NEW_TAG" "$IMAGE_NAME"
-
-            # 显示推送进度
-            echo "Progress: $FILE_COUNT/$TOTAL_FILES images processed. Current image: ${NEW_TAG}  "
         else
             echo "Failed to load image from $IMAGE_FILE"
         fi
     fi
 done
 
-echo "All images loaded, retagged, and pushed. All Task: $FILE_COUNT/$TOTAL_FILES images processed. "
+echo "All images loaded, retagged, and pushed. All Task: $FILE_COUNT/${TOTAL_FILES// /} images processed. "
 
-cleanImages() {
-    local tagName=$1
-    local loadImage=$2
-    docker rmi "$tagName"
-    docker rmi "$loadImage"
-}
