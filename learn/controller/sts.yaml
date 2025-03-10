@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+  labels:
+    name: web
+spec:
+  # PVC存储保留策略
+  persistentVolumeClaimRetentionPolicy:
+  # 设置删除sts的存储保留策略，Retain保留数据（默认），Delete删除数据
+    whenDeleted: Retain
+    # 设置缩容的存储保留策略
+    whenScaled: Delete
+  # Pod管理策略，默认为OrderedReady按照顺序创建，Parallel，即所有Pod同时创建
+  podManagementPolicy: OrderedReady
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      # 最大不可用Pod数量
+      maxUnavailable: 1
+      # 按照分区顺序更新
+      partition: 1
+  # 最小就绪时间
+  minReadySeconds: 10
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  # 无头服务的名称
+  serviceName: "nginx"
+  # Pod模版
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: nginx
+          image: nginx:1.14.2
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: www
+              mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+    - metadata:
+        name: www
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: "local-path"
+        resources:
+          requests:
+            storage: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  labels:
+    name: nginx
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: nginx
+  clusterIP: None

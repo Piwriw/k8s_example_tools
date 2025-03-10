@@ -3,6 +3,15 @@ kind: DaemonSet
 metadata:
   name: fluentd
 spec:
+  # 修订历史最大数量 默认10
+  revisionHistoryLimit: 10
+  # 最短就绪时间 默认0
+  minReadySeconds: 5
+  # 更新策略
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
   selector:
     matchLabels:
       app: fluentd

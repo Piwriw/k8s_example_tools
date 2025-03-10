@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hello
+spec:
+  # 可以并行任务数量，默认1
+  parallelism: 3
+  completions: 3
+  # Pod完成模式，NonIndexed（数量达到completions推出，默认），Indexed
+  # Indexed模式：会被设置为Pod服务名
+  # - 设置Pod名称：<Job Name>-<索引序号>-<随机字符串>
+  # - 设置Annotation "batch.kubernetes.io/job-completion-index": <索引序号>
+  # - 设置Label "batch.kubernetes.io/job-completion-index": <索引序号>，从K8s v1.28 需要开启PodIndexLabel特性门控
+  # - 在容器内注入环境变量JOB_COMPLETION_INDEX，值为索引序号
+  # - 与一个Headless Service搭配使用，Pod网络访问域名将被设置为<$(job_name)-$(index)>.<headless-service-name>，并且设置正确的DNS记录
+  completionMode: NonIndexed
+  # 失败任务的最大重试次数上限
+  backoffLimit: 4
+  # K8s v1.28 开始支持，Pod失效时候，支持Ignore、FailJob、Count或FailIndex
+  podFailurePolicy:
+    rules:
+      - action: FailJob
+  # K8s v1.28 开始支持，Pod失效时候,替换策略
+  podReplacementPolicy: OnPodFailure
+  # K8s v1.27 引入手动设置标签选择器
+  manualSelector: true
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: hello
+          image: busybox
+          command:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the Kubernetes cluster
