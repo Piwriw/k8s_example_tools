@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx-deployment
+spec:
+  # 设置true，表述部署过程中属于暂停状态
+  paused: false
+  # 修订历史最大数量 每个修订版本都有一个对应的RS资源
+  revisionHistoryLimit: 10
+  # Pod最短就绪准备时间，Pod至少达到这个时间，才会进入Pod为Ready状态
+  minReadySeconds: 5
+  # 设置未能处于部署完成的超时空时间，默认600s来，达到这个时间之后，会把Progressing的Status设置为false
+  progressDeadlineSeconds: 600
+  # 更新策略
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  # 副本数，即期望运行的 Pod 数量
+  replicas: 3
+  # 标签选择器，用于管理具有指定标签的 Pod
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    # 模板，用于创建新的 Pod
+    metadata:
+      name: nginx-deployment
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx-deployment
+          image: nginx:1.14.2
+          ports:
+            - containerPort: 80
