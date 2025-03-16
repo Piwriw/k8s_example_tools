@@ -18,8 +18,18 @@ spec:
   backoffLimit: 4
   # K8s v1.28 开始支持，Pod失效时候，支持Ignore、FailJob、Count或FailIndex
   podFailurePolicy:
+    # 按照顺序对多个规则进行评估，一旦某个规则匹配，则立即停止评估后续规则
     rules:
+      # FailJob: 立即终止Job并且标记为Failed，同时停止全部未终止的Pod
+      # Ignore: 重建一个新的Pod，同时不计入backoffLimit
+      # FailIndex： 在使用索引的情况下，将失效索引的Pod设置为不再重试
       - action: FailJob
+        # onPodConditions:根据Pod的情况，采用什么样子的action
+        # onExitCode: 根据Pod退出码，采用什么样子的action
+        onPodConditions:
+          - type: Disrupted
+            status: "true"
+
   # K8s v1.28 开始支持，Pod失效时候,替换策略
   podReplacementPolicy: OnPodFailure
   # K8s v1.27 引入手动设置标签选择器
