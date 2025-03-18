@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  # 定时表达式
+  schedule: "* 1 * * *" #
+  # 设置由于某些原因错过调度，Job最长等待时间
+  startingDeadlineSeconds: 10
+  # 设置并发执行数量
+  # Allow：允许并发，默认配置
+  # Forbid：禁止并发，当有一个正在执行的Job时，新的Job不会被调度
+  # Replace：替换并发，当有一个正在执行的Job时，新的Job会替换掉旧的Job
+  concurrencyPolicy: Allow
+  # 是否挂起 默认false
+  suspend: false
+  # 允许保留的运行失败的Job数量，默认1
+  successfulJobsHistoryLimit: 1
+  # 允许保留运行保留的Pod数量
+  failedJobsHistoryLimit: 1
+  # 设置时区
+  # v1.24 引入，v1.27 进入stable
+  timeZone: Asia/Shanghai
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: hello
+              image: busybox:latest
+              imagePullPolicy: IfNotPresent
+              command:
+                - /bin/sh
+                - -c
+                - date; echo Hello!
+          restartPolicy: OnFailure
