@@ -43,7 +43,7 @@ case "${K9S_ARCH}" in
 esac
 
 # 离线部署目标为 Linux 服务器，固定 OS 为 Linux
-TARGET_OS="linux"
+TARGET_OS="Linux"
 
 # 解析版本号（latest 则从 GitHub API 获取最新 release tag）
 if [ "${K9S_VERSION}" = "latest" ]; then
@@ -56,7 +56,6 @@ if [ -z "${K9S_VERSION}" ]; then
   exit 1
 fi
 
-VERSION_NO_V="${K9S_VERSION#v}"
 TARBALL="k9s_${TARGET_OS}_${K9S_ARCH}.tar.gz"
 DOWNLOAD_URL="https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/${TARBALL}"
 
