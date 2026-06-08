@@ -4,3 +4,4 @@
 *.tar
 *.tar.gz
 *.tgz
+k9s-setup/packages/k9s
