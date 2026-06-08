@@ -90,5 +90,5 @@ sudo ./k9s-offline-install.sh
 sudo ./k9s-offline-install.sh -p k9s-offline-amd64.tar.gz
 
 # 安装到自定义目录
-INSTALL_DIR=$HOME/bin sudo ./k9s-offline-install.sh
+sudo INSTALL_DIR=$HOME/bin ./k9s-offline-install.sh
 ```
