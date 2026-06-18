@@ -1,0 +1,21 @@
+mode: standalone
+replicas: 1
+drivesPerNode: 1
+persistence:
+    enabled: true
+    size: 5Gi
+    storageClass: sata-csi-udisk
+    accessMode: ReadWriteOnce
+buckets:
+    - name: chunks
+      policy: none
+      purge: false
+    - name: ruler
+      policy: none
+      purge: false
+rootUser: root-user
+rootPassword: supersecretpassword
+users:
+    - accessKey: logs-user
+      secretKey: supersecretpassword
+      policy: readwrite
